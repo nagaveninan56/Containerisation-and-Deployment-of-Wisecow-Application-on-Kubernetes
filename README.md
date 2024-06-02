@@ -1,8 +1,9 @@
-Dockerization:
+**Dockerization:**
 
-Clone the repository:
-git clone https://github.com/nyrahul/wisecow
-Write Dockerfile:
+**Clone the repository:**
+git clone https://github.com/nagaveninan56/Containerisation-and-Deployment-of-Wisecow-Application-on-Kubernetes.git
+
+**Write Dockerfile:**
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
@@ -23,11 +24,17 @@ ENV NAME Wisecow
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
-Build the Docker image:
+
+**Build the Docker image:**
+
 docker build -t wisecow-app .
-Test the Docker image locally:
+
+**Test the Docker image locally:**
+
 docker run -p 8080:80 wisecow-app
-Kubernetes Deployment
+
+**Kubernetes Deployment**
+
 Create Deployment YAML (wisecow-deployment.yaml):
 apiVersion: apps/v1
 kind: Deployment
@@ -50,7 +57,9 @@ spec:
         image: <your-container-registry>/wisecow-app:latest
         ports:
         - containerPort: 80
-Create Service YAML (wisecow-service.yaml):
+        
+**Create Service YAML (wisecow-service.yaml):**
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -63,12 +72,16 @@ spec:
     port: 80
     targetPort: 80
   type: LoadBalancer
-Apply the manifest files:
+
+**Apply the manifest files:**
+
 kubectl apply -f wisecow-deployment.yaml
 kubectl apply -f wisecow-service.yaml
-Continuous Integration and Deployment (CI/CD)
+
+**Continuous Integration and Deployment (CI/CD)**
 GitHub Actions Workflow:
 Create .github/workflows/ci-cd.yml:
+
 name: CI/CD Pipeline
 
 on:
@@ -96,7 +109,9 @@ jobs:
       env:
         KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
 Configure Docker and Kubernetes secrets in the GitHub repository settings.
-TLS Implementation
+
+T**LS Implementation**
+
 Generate TLS Certificates:
 Use tools like Let's Encrypt to generate certificates.
 Configure TLS in Kubernetes Ingress:
